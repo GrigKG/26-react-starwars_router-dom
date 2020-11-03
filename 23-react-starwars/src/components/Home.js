@@ -7,21 +7,26 @@ import {defaultHero, friends} from "../utils/Constants";
 class Home extends React.Component {
     constructor(props) {
         super(props);
-        this.myHero = this.props.match.params.hero;
-        if(!friends.includes(this.myHero)){
-            this.myHero=defaultHero;
+        this.state = {
+            myHero: this.props.match.params.hero
+        }
+        if(!friends.includes(this.state.myHero)){
+            this.state.myHero=defaultHero;
         }
     }
 
     componentDidMount() {
-        this.props.changeHero(this.myHero);
+        this.props.changeHero(this.state.myHero);
     }
 
+    changeMyHero = myHero => {
+        this.setState({myHero})
+    }
     render() {
         return (
             <main className="clearfix">
-                <Hero hero={this.myHero}/>
-                <DreamTeam hero={this.myHero} changeHero={this.props.changeHero}/>
+                <Hero hero={this.state.myHero}/>
+                <DreamTeam hero={this.state.myHero} changeHero={this.props.changeHero} changeMyHero={this.changeMyHero}/>
                 <FarGalaxy/>
             </main>
         );

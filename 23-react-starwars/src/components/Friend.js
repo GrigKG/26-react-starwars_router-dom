@@ -8,10 +8,12 @@ class Friend extends Component {
 
     changeHero = hero => {
         this.props.changeHero(hero);
+        this.props.changeMyHero(hero);
+
     }
 
     render() {
-        let styles = 'col-4 p-1 ';
+        let styles = 'w-100 p-1 ';
         if (this.props.pos === 7) {
             styles += style.bottomLeft;
         }
@@ -19,8 +21,8 @@ class Friend extends Component {
             styles += style.bottomRight;
         }
         return (
-            <Link to={`/${homePage}/${characters[this.props.item].name}`}>
-                <img onClick={()=>this.changeHero(this.props.item)} className={styles}
+            <Link className='col-4' to={`/${homePage}/${characters[this.props.item].name}`}>
+                <img className={styles}  onClick={()=>this.changeHero(this.props.item)}
                      src={characters[this.props.item].img}
                      alt={characters[this.props.item].name}/>
             </Link>
