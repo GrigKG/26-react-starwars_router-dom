@@ -1,0 +1,3 @@
+# Project exclude paths
+/23-react-starwars/node_modules/
+/node_modules/
