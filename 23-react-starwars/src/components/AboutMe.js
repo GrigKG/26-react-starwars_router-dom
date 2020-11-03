@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from '../css_modules/aboutMe.module.css';
 
-import {characters, periodMonth} from "../utils/Constants";
+import {characters, defaultHero, friends, periodMonth} from "../utils/Constants";
 
 class AboutMe extends React.Component {
     constructor(props) {
@@ -10,7 +10,10 @@ class AboutMe extends React.Component {
     }
 
     componentDidMount() {
-        const key = this.props.match.params.hero||'luke';
+        let key = this.props.match.params.hero;
+        if(!friends.includes(key)){
+            key=defaultHero;
+        }
         let hero = JSON.parse(localStorage.getItem(key));
         if (!hero || (Date.now() - hero.time) > periodMonth) {
             fetch(characters[key].url)

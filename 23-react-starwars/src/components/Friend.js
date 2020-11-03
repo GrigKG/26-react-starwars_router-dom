@@ -1,12 +1,13 @@
 import style from '../css_modules/friend.module.css';
 
 import React, {Component} from 'react';
-import {characters} from "../utils/Constants";
+import {characters, homePage} from "../utils/Constants";
+import {Link} from "react-router-dom";
 
 class Friend extends Component {
 
-    constructor(props) {
-        super(props);
+    changeHero = hero => {
+        this.props.changeHero(hero);
     }
 
     render() {
@@ -18,7 +19,11 @@ class Friend extends Component {
             styles += style.bottomRight;
         }
         return (
-            <img onClick={()=>this.props.changeHero(this.props.item)} className={styles} src={characters[this.props.item].img} alt="friend"/>
+            <Link to={`/${homePage}/${characters[this.props.item].name}`}>
+                <img onClick={()=>this.changeHero(this.props.item)} className={styles}
+                     src={characters[this.props.item].img}
+                     alt={characters[this.props.item].name}/>
+            </Link>
         );
     }
 
